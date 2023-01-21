@@ -2,11 +2,8 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",     /* Recommended React Native TSConfig base */
   "compilerOptions": {
-<<<<<<< HEAD
-=======
     "jsx": "react",
    
->>>>>>> 053dc9f (check)
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Completeness */
