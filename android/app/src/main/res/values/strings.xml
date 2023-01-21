@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">SmartCampusApp</string>
+=======
+    <string name="app_name">SmartCampus</string>
+>>>>>>> 053dc9f (check)
 </resources>

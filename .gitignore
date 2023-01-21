@@ -31,8 +31,11 @@ local.properties
 *.iml
 *.hprof
 .cxx/
+<<<<<<< HEAD
 *.keystore
 !debug.keystore
+=======
+>>>>>>> 053dc9f (check)
 
 # node.js
 #
@@ -40,6 +43,15 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
+<<<<<<< HEAD
+=======
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+!debug.keystore
+
+>>>>>>> 053dc9f (check)
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
@@ -58,6 +70,9 @@ yarn-error.log
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
+<<<<<<< HEAD
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+=======
+>>>>>>> 053dc9f (check)

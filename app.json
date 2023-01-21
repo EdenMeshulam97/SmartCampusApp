@@ -1,4 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "SmartCampusApp",
   "displayName": "SmartCampusApp"
+=======
+  "name": "SmartCampus",
+  "displayName": "SmartCampus"
+>>>>>>> 053dc9f (check)
 }

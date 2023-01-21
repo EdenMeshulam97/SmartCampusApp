@@ -1,6 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+<<<<<<< HEAD
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
@@ -13,6 +14,12 @@ if linkage != nil
 end
 
 target 'SmartCampusApp' do
+=======
+platform :ios, '12.4'
+install! 'cocoapods', :deterministic_uuids => false
+
+target 'SmartCampus' do
+>>>>>>> 053dc9f (check)
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -23,18 +30,30 @@ target 'SmartCampusApp' do
     # Hermes is now enabled by default. Disable by setting this flag to false.
     # Upcoming versions of React Native may rely on get_default_flags(), but
     # we make it explicit here to aid in the React Native upgrade process.
+<<<<<<< HEAD
     :hermes_enabled => flags[:hermes_enabled],
+=======
+    :hermes_enabled => true,
+>>>>>>> 053dc9f (check)
     :fabric_enabled => flags[:fabric_enabled],
     # Enables Flipper.
     #
     # Note that if you have use_frameworks! enabled, Flipper will not work and
     # you should disable the next line.
+<<<<<<< HEAD
     :flipper_configuration => flipper_config,
+=======
+    :flipper_configuration => FlipperConfiguration.enabled,
+>>>>>>> 053dc9f (check)
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+<<<<<<< HEAD
   target 'SmartCampusAppTests' do
+=======
+  target 'SmartCampusTests' do
+>>>>>>> 053dc9f (check)
     inherit! :complete
     # Pods for testing
   end
