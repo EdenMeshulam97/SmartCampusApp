@@ -24,8 +24,10 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.19.0",
     "react-native-svg": "^12.1.1",
+    "react-native-vector-icons": "^9.2.0",
     "react-redux": "^8.0.5",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -36,7 +38,9 @@
     "@types/jest": "^26.0.24",
     "@types/react": "^18.0.27",
     "@types/react-native": "^0.70.9",
+    "@types/react-native-vector-icons": "^6.4.13",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "babel-jest": "^26.6.3",
