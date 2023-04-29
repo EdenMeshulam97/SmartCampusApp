@@ -7,12 +7,11 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
-  LoginButtonContainer,
-  LoginContainer,
   LogoContainer,
+  RegisterButtonContainer,
+  RegisterContainer,
   TextInputsContainer,
-} from './Login.styled';
-import SmartCampusLogo from '../../assets/SmartmpusLogo/SmartCampusLogo';
+} from './Register.styled';
 import {AppTypography} from '../../styles/global.styled';
 import {
   TypographyBold,
@@ -20,21 +19,32 @@ import {
   TypographySize,
 } from '../../types/styles.d';
 import {
-  LOGIN_TITLE,
+  REGISTER_TITLE,
   PASSWORD_TEXTINPUT_PLACEHOLDER,
+  CONFIRM_PASSWORD_TEXTINPUT_PLACEHOLDER,
   USERNAME_TEXTINPUT_PLACEHOLDER,
+  ROLE_TEXTINPUT_PLACEHOLDER,
+  FIRST_NAME_TEXTINPUT_PLACEHOLDER,
+  LAST_NAME_TEXTINPUT_PLACEHOLDER,
 } from '../../utils/consts/Login';
-import SignInButton from './SignInButton';
-import SignUpButton from './SignUpButton';
 import {RootState, useReduxSelector} from '../../redux';
-import useLogin from './useLogin';
+import useLogin from './useRegister';
 import TextInput from '../../components/TextInput/TextInput';
-import Register from '../Register/Register';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import useRegister from './useRegister';
+import CancelButton from './CancelButton';
+import SignUpButton from './SignUpButton';
+import SmartCampusLogo from '../../assets/SmartmpusLogo/SmartCampusLogo';
 
-const Login = () => {
-  const {onPasswordChange, onUserNameChange, loading, handleSubmit} =
-    useLogin();
+const Register = () => {
+  const {
+    onPasswordChange,
+    onFirstNameChange,
+    onLastNameChange,
+    onEmailChange,
+    onRoleChange,
+    loading,
+    handleSubmit,
+  } = useRegister();
   const [logoScale, setLogoScale] = useState(0.8);
 
   /**
@@ -49,6 +59,7 @@ const Login = () => {
       setLogoScale(1);
     });
   }, []);
+
   return (
     <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -57,7 +68,7 @@ const Login = () => {
         contentContainerStyle={{backgroundColor: 'white'}}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <ScrollView contentContainerStyle={{flex: 1}}>
-          <LoginContainer style={{backgroundColor: 'white'}}>
+          <RegisterContainer style={{backgroundColor: 'white'}}>
             <LogoContainer scale={logoScale}>
               <SmartCampusLogo />
             </LogoContainer>
@@ -66,27 +77,37 @@ const Login = () => {
                 textColor={TypographyColor.black}
                 bold={TypographyBold.md}
                 size={TypographySize.md}>
-                {LOGIN_TITLE}
+                {REGISTER_TITLE}
               </AppTypography>
               <TextInput
-                placeholder={USERNAME_TEXTINPUT_PLACEHOLDER}
+                placeholder={FIRST_NAME_TEXTINPUT_PLACEHOLDER}
                 //onChange={}
               />
               <TextInput
-                placeholder={PASSWORD_TEXTINPUT_PLACEHOLDER}
+                placeholder={LAST_NAME_TEXTINPUT_PLACEHOLDER}
                 //onChange={}
+              />
+              <TextInput placeholder={USERNAME_TEXTINPUT_PLACEHOLDER} />
+              <TextInput
+                placeholder={PASSWORD_TEXTINPUT_PLACEHOLDER}
                 secureTextEntry
               />
-              <LoginButtonContainer>
-                <SignInButton loading={loading} onPress={handleSubmit} />
+              <TextInput
+                placeholder={CONFIRM_PASSWORD_TEXTINPUT_PLACEHOLDER}
+                secureTextEntry
+              />
+              <TextInput placeholder={ROLE_TEXTINPUT_PLACEHOLDER} />
+
+              <RegisterButtonContainer>
+                <CancelButton loading={loading} onPress={handleSubmit} />
                 <SignUpButton loading={loading} onPress={handleSubmit} />
-              </LoginButtonContainer>
+              </RegisterButtonContainer>
             </TextInputsContainer>
-          </LoginContainer>
+          </RegisterContainer>
         </ScrollView>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };
 
-export default Login;
+export default Register;
