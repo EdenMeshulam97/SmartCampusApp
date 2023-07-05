@@ -1,74 +1,66 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {serverLogin} from '../../services/serverApi';
-import {useDispatch} from 'react-redux';
-import {getUser} from '../../redux/userReducer';
+import React, { useState} from 'react';
 import {useReduxDispatch} from '../../redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {setLogin} from '../../redux/AuthenticationReducer';
-import {AlertDialog} from 'native-base';
+import { IRegister } from '../../types/register';
+import { serverRegister } from '../../services/serverApi';
+import { useNavigation } from '@react-navigation/native';
 const useRegister = () => {
-  const [firstName, setFirstName] = useState<string>();
-  const [lastName, setLastName] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [confirmPassword, setConfirmPassword] = useState<string>();
-  const [role, setRole] = useState<string>();
-  const [loading, setLoading] = useState(false);
+const navigation = useNavigation();
+const [user,setUser]= useState<IRegister>();
+ 
+const [loading, setLoading] = useState(false);
 
   const dispatch = useReduxDispatch();
-  const onFirstNameChange = (value: string) => setFirstName(value);
-  const onLastNameChange = (value: string) => setLastName(value);
-  const onEmailChange = (value: string) => setEmail(value);
-  const onRoleChange = (value: string) => setRole(value);
-  const onPasswordChange = (value: string) => setPassword(value);
-  const onConfirmPasswordChange = (value: string) => setConfirmPassword(value);
 
-  // const isTokenInStorage = useCallback(async () => {
-  //   const isExist = await AsyncStorage.getItem('@token');
-  //   if (isExist) {
-  //     dispatch(setLogin(true));
-  //   } else {
-  //     dispatch(setLogin(false));
-  //   }
-  // }, []);
 
-  // useEffect(() => {
-  //   isTokenInStorage();
-  // }, []);
+  //Handle the REgister form inputs.
+  const handleInputChange = (state:String,value:string)=>{
+   setUser((currentUser:any) => ({...currentUser, [state as string]: value}))
+  }
 
-  const handleSubmit = useCallback(async () => {
-    dispatch(setLogin(true));
-    if (firstName && lastName && email && role && password) {
+  //Submit the form to the server.
+  const submitForm =async ()=>{
+     try{
+      if(!user) return
       setLoading(true);
-      // const getUserResponse = await dispatch(
-      //   getUser({email: userName, password}),
-      // );
-      // if (getUserResponse) {
-      //   setLoginError('Error');
-      // } else {
-      //   setLoginError('');
-      // }
-      //TODO: Change to register function
+      console.log(user);
+      const serverRequest = await serverRegister(user);
+      console.log(serverRequest);
+      if(serverRequest.success === true)
+      {
+        navigation.goBack();
+      }
+      else
+      {
+
+      }
+     }
+     catch(e){
+      console.error(e);
+     }
+     finally{
       setLoading(false);
-    }
-  }, [firstName, lastName, email, role, password]);
+
+     }
+
+  }
+
+
+  //Validate The unputs value befire submitting.
+  const validateForm = ()=>{
+   
+  }
 
   return {
-    onPasswordChange,
-    onFirstNameChange,
-    onLastNameChange,
-    onEmailChange,
-    onRoleChange,
-    onConfirmPasswordChange,
-    handleSubmit,
-    firstName,
-    lastName,
-    email,
-    password,
-    role,
-    loading,
-    confirmPassword,
+   user,
+   loading,
+   handleInputChange,
+   submitForm,
+   validateForm
   };
 };
 
 export default useRegister;
+
+
+
+

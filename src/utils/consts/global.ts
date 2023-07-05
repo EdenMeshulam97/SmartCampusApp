@@ -1,0 +1,4 @@
+export const BATTERY_LOW_PERCENT = 20
+export const BATTERY_MEDIUM_PERCENT= 45
+
+export const ICON_DEFAULT_SIZE=30

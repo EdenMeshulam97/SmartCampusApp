@@ -1,7 +1,7 @@
 import {Animated, I18nManager, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer, DrawerActions} from '@react-navigation/native';
-import Home from '../Home/Home';
+import Classes from '../Classes/Classes';
 import Iot from '../Iot/Iot';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HeaderMenuButton from '../../components/headerMenuButton/headerMenuButton';
@@ -9,8 +9,12 @@ import {MainContainer} from './Main.styled';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../redux';
 import Login from '../Login/Login';
+import Register from '../Register/Register';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
 const Main = () => {
   I18nManager.allowRTL(false);
@@ -18,29 +22,38 @@ const Main = () => {
   const isUserLogin = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   return (
-    <MainContainer>
+    <MainContainer> 
+      <NavigationContainer>
       {!isUserLogin ? (
-        <Login />
+       
+          <Stack.Navigator
+           initialRouteName="Login"
+           screenOptions={{
+           headerShown:false
+          }}>
+            <Stack.Screen name="Login" component={Login}/>
+            <Stack.Screen name="Register" component={Register}/>
+          </Stack.Navigator>
+        
       ) : (
-        <NavigationContainer>
+        
           <Drawer.Navigator
-            initialRouteName="Home"
+            initialRouteName="Classes"
             screenOptions={{
               headerStyle: {
                 backgroundColor: 'white',
-                alignSelf: 'stretch',
-                direction: 'ltr',
               },
               drawerPosition: 'left',
               headerTitleAlign: 'center',
-              headerLeft: () => null,
-              headerRight: () => HeaderMenuButton(),
+              headerLeft: () => HeaderMenuButton(),
+              headerRight: () => null,
             }}>
-            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Classes" component={Classes} />
             <Drawer.Screen name="Iot" component={Iot} />
           </Drawer.Navigator>
-        </NavigationContainer>
+        
       )}
+      </NavigationContainer>
     </MainContainer>
   );
 };

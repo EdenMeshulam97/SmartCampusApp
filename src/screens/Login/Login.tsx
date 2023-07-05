@@ -22,7 +22,7 @@ import {
 import {
   LOGIN_TITLE,
   PASSWORD_TEXTINPUT_PLACEHOLDER,
-  USERNAME_TEXTINPUT_PLACEHOLDER,
+  EMAIL_TEXTINPUT_PLACEHOLDER,
 } from '../../utils/consts/Login';
 import SignInButton from './SignInButton';
 import SignUpButton from './SignUpButton';
@@ -30,7 +30,7 @@ import {RootState, useReduxSelector} from '../../redux';
 import useLogin from './useLogin';
 import TextInput from '../../components/TextInput/TextInput';
 import Register from '../Register/Register';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
   const {onPasswordChange, onUserNameChange, loading, handleSubmit} =
@@ -49,6 +49,7 @@ const Login = () => {
       setLogoScale(1);
     });
   }, []);
+const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -69,7 +70,7 @@ const Login = () => {
                 {LOGIN_TITLE}
               </AppTypography>
               <TextInput
-                placeholder={USERNAME_TEXTINPUT_PLACEHOLDER}
+                placeholder={EMAIL_TEXTINPUT_PLACEHOLDER}
                 //onChange={}
               />
               <TextInput
@@ -79,14 +80,14 @@ const Login = () => {
               />
               <LoginButtonContainer>
                 <SignInButton loading={loading} onPress={handleSubmit} />
-                <SignUpButton loading={loading} onPress={handleSubmit} />
+                <SignUpButton loading={loading} onPress={() => {navigation.navigate("Register");}} />
               </LoginButtonContainer>
             </TextInputsContainer>
           </LoginContainer>
         </ScrollView>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
-  );
+      );
 };
 
 export default Login;
